@@ -38,7 +38,7 @@ In libspec, a `Feature` (and its counterpart `Requirement`) is a class used to f
 When you look at `spec/app.py`, you can see how we implement specific capabilities using the base classes we created:
 
 ```python
-from .err import Feat, Req
+from err import Feat, Req
 
 class App(Req):
     '''This program found in project-root/main.py should emit the
@@ -56,7 +56,7 @@ Check out `spec/main_spec.py`:
 
 ```python
 from libspec import Spec
-from . import app
+import app
 
 class SmallestExample(Spec):
     # Import specs under the `modules` method
@@ -72,10 +72,20 @@ Here, we inherit from `libspec.Spec` and implement the `modules` method to retur
 
 ## Building the Spec
 
-To actually generate your parsed object model, execute the main spec file as a Python module from your project root:
+To actually generate your parsed object model, execute the main spec file as a Python module from your project root. Be sure you've set PYTHONPATH and aren't using relative imports:
+
+```bash
+export PYTHONPATH=.
+```
 
 ```bash
 python -m spec.main_spec
+```
+
+Or, in a `uv` environment:
+
+```bash
+uv run libspec build spec/main_spec.py
 ```
 
 This runs your `SmallestExample` code, constructs your specification artifact, and neatly outputs it all into the `build-spec/` folder.

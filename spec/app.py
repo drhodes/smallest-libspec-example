@@ -2,7 +2,7 @@
 Features and requirements for the smallest libspec example 
 """
 
-from .err import Feat, Req
+from err import Feat, Req
 
 class App(Req):
     '''This program found in project-root/main.py should emit the
