@@ -1,14 +1,15 @@
 PY=uv run python
-
 SPEC_BUILD=spec-build
+LIBSPEC=uv run libspec
+
 
 .PHONY: spec
 spec: $(SPECS)
-	$(PY) -m spec.main_spec
+	$(LIBSPEC) build ./spec/main_spec.py
 
 .PHONY: diff
 diff:
-	$(PY) -m libspec.spec_diff $(SPEC_BUILD) 
+	$(LIBSPEC) diff $(SPEC_BUILD) 
 
 .PHONY: test-mcp
 test-mcp: 
