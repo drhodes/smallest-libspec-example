@@ -3,7 +3,7 @@ smallest example
 """
 
 from libspec import Spec
-import app
+from . import app
 
 class SmallestExample(Spec):
     def modules(self):
